@@ -31,7 +31,7 @@ pausedTime_(0),
 pausedInterval_(0.1),
 cancelled_(false)
 {
-    core_ = new CMMCore();
+    // core_ = new CMMCore();
     ofstream MyFile("test123.txt");
     MyFile << "Files can be tricky, but it is fun enough!";
     // get current time in seconds
@@ -289,5 +289,5 @@ void CMMRunner::setEventPosition(MDAEvent& event)
 
 // int main(int argc, char **argv)
 // {
-//  auto var = CMMRunner();
+// //  auto var = CMMRunner();
 // }
