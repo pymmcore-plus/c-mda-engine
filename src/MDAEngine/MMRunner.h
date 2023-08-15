@@ -29,7 +29,7 @@ public:
     bool waitUntilEvent(MDAEvent& event);
     void setupEvent(MDAEvent& event);
     unsigned char* execEvent(MDAEvent& event);
-    void teardownEvent(MDAEvent& event);
+    // void teardownEvent(MDAEvent& event);
     void resetTimer();
     float timeElapsed();
     bool checkCanceled();

@@ -9,7 +9,9 @@ from distutils.core import setup, Extension
 
 mmrunner_module = Extension('_mmrunner',
                            sources=['mmrunner_wrap.cxx', 
-                                    'MDAPosition.cpp'],
+                                    'MDAPosition.cpp',
+                                    'MDAEvent.cpp',
+                                    'MMRunner.cpp'],
                                swig_opts=[
         '-c++',
         '-py3',

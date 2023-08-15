@@ -21,6 +21,14 @@ Channel::Channel(string config, string group):
     ;
 }
 
+PropertyTuple::PropertyTuple(string device_name, string property_name, float value):
+    deviceName_(device_name),
+    propertyName_(property_name),
+    value_(value)
+{
+    ;
+}
+
 MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float exposure,
     float min_start_time, Position position, int global_index):
     index_(index),
