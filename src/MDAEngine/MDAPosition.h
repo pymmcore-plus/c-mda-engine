@@ -8,13 +8,12 @@
 #pragma warning(disable : 4290)
 #endif
 
-// #include <climits>
+#include <climits>
 #include <string>
 
 #define MaxNameLength  256
 #define MaxConfigLength 2560
-// #define UnsetPosition  (float)INT_MIN
-#define UnsetPosition  -12345.123
+#define UnsetPosition  (float)INT_MIN
 
 // enum Indices {TIME, POSITION, GRID, CHANNEL, Z};
 // enum GridPlans {GridFromEdges, GridRelative, NoGrid};
