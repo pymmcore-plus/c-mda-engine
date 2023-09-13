@@ -8,9 +8,6 @@
 #pragma warning(disable : 4290)
 #endif
 
-#include <map>
-#include <vector>
-#include <string>
 #include <climits>
 #include <string>
 
@@ -42,49 +39,6 @@ private:
     // TODO: sequence?
 
 };
-
-// class Channel
-// {
-// public:
-//     char[MaxConfigLength] name;
-//     std::string group;
-//     float exposure;
-//     bool doStack;
-//     float zOffset;
-//     uint acquireEvery;
-//     std::string Camera;
-
-//     void setName(char[MaxConfigLength] name);
-//     // {
-//     //     strcpy(this->name, name);
-//     // }
-//     void setGroup(std::string group);
-//     // {
-//     //     strcpy(this->group, group);
-//     // }
-//     void setExposure(float exposure);
-//     // {
-//     //     this->exposure = exposure;
-//     // }
-//     void setDoStack(bool doStack);
-//     // {
-//     //     this->doStack = doStack;
-//     // }
-//     void setZOffset(float zOffset);
-//     // {
-//     //     this->zOffset = zOffset;
-//     // }
-//     void setAcquireEvery(uint acquireEvery);
-//     // {
-//     //     this->acquireEvery = acquireEvery;
-//     // }
-//     void setCamera(std::string Camera);
-//     // {
-//     //     strcpy(this->Camera, Camera);
-//     // }
-// };
-
-// vector<Indices> DefaultAxisOrder = {TIME, POSITION, GRID, CHANNEL, Z};
 
 
 #endif //_MDAPosition_H_

@@ -10,6 +10,6 @@
 %include "MDAEvent.h"
 %include "MMRunner.h"
 
-// swig -c++ -python mmrunner_swig.i 
-// c++ -c mmrunner_swig_wrap.cxx -I/home/ubuntu/miniconda3/envs/micro-manager/include/python3.7m -fPIC
-// c++ -shared mmrunner_swig_wrap.o  -o _mmrunner.o
+// swig -c++ -python mmrunner.i 
+// c++ -c mmrunner_wrap.cxx -I/home/ubuntu/miniconda3/envs/micro-manager/include/python3.7m -fPIC
+// c++ -shared mmrunner_wrap.o  -o _mmrunner.o

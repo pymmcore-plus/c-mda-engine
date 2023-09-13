@@ -1,28 +1,5 @@
 #include "MDAPosition.h"
-#include <algorithm>
-#include <cassert>
-#include <chrono>
-#include <cstring>
-#include <fstream>
-#include <set>
-#include <sstream>
-#include <vector>
 #include <iostream>
-
-#include <string>
-#include <vector>
-#include <map>
-
-#ifndef _WINDOWS
-// Needed on Unix for getcwd() and gethostname()
-#include <pwd.h>
-#include <sys/types.h>
-#include <unistd.h>
-#else
-// for _getcwd
-#include <direct.h>
-#include <vector>
-#endif
 
 using namespace std;
 
