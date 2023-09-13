@@ -1,4 +1,12 @@
 %module mmrunner
+
+%include exception.i
+%include std_string.i
+%include std_vector.i
+%include std_map.i
+%include std_pair.i
+%include "typemaps.i"
+
 %{
 #define SWIG_FILE_WITH_INIT
 #include "MDAPosition.h"

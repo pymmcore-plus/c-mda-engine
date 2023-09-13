@@ -8,6 +8,8 @@
 #pragma warning(disable : 4290)
 #endif
 #include "MDAEvent.h"
+#include <vector>
+
 // #include "../MMCore.h"
 
 
