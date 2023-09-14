@@ -45,6 +45,13 @@ public:
     void setEventExposure(MDAEvent& event);
     void setEventChannel(MDAEvent& event);
     void setEventAutoshutter(MDAEvent& event);
+
+    // from mmcore
+    unsigned getImageWidth() { return core_->getImageWidth(); };
+    unsigned getImageHeight() { return core_->getImageHeight(); };
+    unsigned getBytesPerPixel() { return core_->getBytesPerPixel(); };
+    unsigned getImageBitDepth() { return core_->getImageBitDepth(); };
+
 private:
     CMMCore* core_;
     bool running_;
