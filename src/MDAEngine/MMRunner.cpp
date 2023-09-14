@@ -206,12 +206,12 @@ void * CMMRunner::runEvent(MDAEvent& event)
 }
 void* CMMRunner::execEvent(MDAEvent& event)
 {
-    core_.snapImage();
+    core_->snapImage();
     if (!event.KeepShutterOpen())
     {
-        core_.setShutterOpen(false);
+        core_->setShutterOpen(false);
     }
-    void* output = core_.getImage();
+    void* output = core_->getImage();
     return output;
 }
 
