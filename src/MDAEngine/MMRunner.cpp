@@ -294,6 +294,11 @@ void CMMRunner::setEventPosition(MDAEvent& event)
     // self._mmc.setXYPosition(x_pos, y_pos);
 }
 
+
+void CMMRunner::loadSystemConfiguration(std::string config_file)
+{
+    core_->loadSystemConfiguration(config_file.c_str());
+}
 // int main(int argc, char **argv)
 // {
 // //  auto var = CMMRunner();

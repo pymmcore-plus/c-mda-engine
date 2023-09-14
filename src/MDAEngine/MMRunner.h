@@ -45,6 +45,7 @@ public:
     void setEventExposure(MDAEvent& event);
     void setEventChannel(MDAEvent& event);
     void setEventAutoshutter(MDAEvent& event);
+    void loadSystemConfiguration(std::string config_file="MMConfig_demo.cfg");
 
     // from mmcore
     unsigned getImageWidth() { return core_->getImageWidth(); };
