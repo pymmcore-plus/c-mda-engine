@@ -30,7 +30,7 @@ PropertyTuple::PropertyTuple(string device_name, string property_name, float val
 }
 
 MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float exposure,
-    float min_start_time, Position position, int global_index, bool keep_shutter_open):
+    float min_start_time, Position position, Action action, int global_index, bool keep_shutter_open):
     index_(index),
     channel_(channel),
     exposure_(exposure),
@@ -40,6 +40,7 @@ MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float expo
     xSet_(false),
     ySet_(false),
     zSet_(false),
+    action_(action),
     keepShutterOpen_(keep_shutter_open)
     {
     ;
@@ -95,22 +96,22 @@ bool MDAEvent::isAutoshutterSet(){
     return false;
 }
 
-// int main(){
-// // Here, we instantiate MDAEvent objects and print out their attributes.
-// // We also instantiate Position and Channel objects and print out their attributes.
-// // We also instantiate PropertyTuple objects and print out their attributes.
-// auto index = std::map<std::string, int>();
-// index["t"] = 4;
-// index["c"] = 0;
-// index["z"] = 5;
-// Channel channel = Channel("DAPI", "channel");
-// float exposure = 50;
-// float min_start_time = 0;
-// Position position = Position();
-// position.setX(0);
-// position.setY(0);
-// position.setZ(0);
-// position.setName("dummyPos");
-// int global_index = 0;
-// auto mdaevent = MDAEvent(index, channel, exposure, min_start_time, position, global_index);
-// }
+int main(){
+// Here, we instantiate MDAEvent objects and print out their attributes.
+// We also instantiate Position and Channel objects and print out their attributes.
+// We also instantiate PropertyTuple objects and print out their attributes.
+auto index = std::map<std::string, int>();
+index["t"] = 4;
+index["c"] = 0;
+index["z"] = 5;
+Channel channel = Channel("FITC", "channel");
+float exposure = 50;
+float min_start_time = 8;
+Position position = Position();
+position.setZ(2);
+position.setName("dummyPos");
+int global_index = 0;
+bool keep_shutter_open = false;
+Action action = AcquireImage;
+auto mdaevent = MDAEvent(index, channel, exposure, min_start_time, position, action, global_index, keep_shutter_open);
+}
