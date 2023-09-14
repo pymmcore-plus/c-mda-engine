@@ -30,7 +30,7 @@ PropertyTuple::PropertyTuple(string device_name, string property_name, float val
 }
 
 MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float exposure,
-    float min_start_time, Position position, int global_index):
+    float min_start_time, Position position, int global_index, bool keep_shutter_open):
     index_(index),
     channel_(channel),
     exposure_(exposure),
@@ -39,10 +39,15 @@ MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float expo
     globalIndex_(global_index),
     xSet_(false),
     ySet_(false),
-    zSet_(false)
+    zSet_(false),
+    keepShutterOpen_(keep_shutter_open)
     {
     ;
     }
+bool MDAEvent::KeepShutterOpen(){
+    return keepShutterOpen_;
+}
+
 float MDAEvent::getMinStartTime(){
     return minStartTime_;
 }

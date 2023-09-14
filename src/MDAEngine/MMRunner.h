@@ -27,10 +27,11 @@ public:
     void cancel();
     void togglePause();
     void run(std::vector<MDAEvent> &events);
-    bool runEvent(MDAEvent& event);
+    void* runEvent(MDAEvent& event);
     bool waitUntilEvent(MDAEvent& event);
     void setupEvent(MDAEvent& event);
-    unsigned char* execEvent(MDAEvent& event);
+    void* execEvent(MDAEvent& event);
+    
     // void teardownEvent(MDAEvent& event);
     void resetTimer();
     float timeElapsed();

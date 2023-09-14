@@ -149,6 +149,7 @@ bool CMMRunner::waitUntilEvent(MDAEvent& event)
                 break;
             
             // sleep for minimum of 0.5 seconds and to_go
+            // TODO: 0.5 seconds should be a hyperparameter.
             auto sleepdur =min(to_go*1000, (float)(500.0));
             sleep_for(sleepdur);
 
@@ -190,23 +191,31 @@ finishRun();
 * Returns
 * -------
 * bool
-* Whether the MDA was cancelled while running.
+* Returns the acquisiton output.
 */
-bool CMMRunner::runEvent(MDAEvent& event)
+void * CMMRunner::runEvent(MDAEvent& event)
 {
+
     if (waitUntilEvent(event)||  !running_)
     {
-        return true;
+        return nullptr;
     }
     setupEvent(event);
     auto output = execEvent(event);
-    return false;
-}
-unsigned char* CMMRunner::execEvent(MDAEvent& event)
-{
-    unsigned char* output;
     return output;
 }
+void* CMMRunner::execEvent(MDAEvent& event)
+{
+    core_.snapImage();
+    if (!event.KeepShutterOpen())
+    {
+        core_.setShutterOpen(false);
+    }
+    void* output = core_.getImage();
+    return output;
+}
+
+
 void CMMRunner::setupEvent(MDAEvent& event)
 {
         // if event.keep_shutter_open:
