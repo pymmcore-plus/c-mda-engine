@@ -96,22 +96,22 @@ bool MDAEvent::isAutoshutterSet(){
     return false;
 }
 
-int main(){
-// Here, we instantiate MDAEvent objects and print out their attributes.
-// We also instantiate Position and Channel objects and print out their attributes.
-// We also instantiate PropertyTuple objects and print out their attributes.
-auto index = std::map<std::string, int>();
-index["t"] = 4;
-index["c"] = 0;
-index["z"] = 5;
-Channel channel = Channel("FITC", "channel");
-float exposure = 50;
-float min_start_time = 8;
-Position position = Position();
-position.setZ(2);
-position.setName("dummyPos");
-int global_index = 0;
-bool keep_shutter_open = false;
-Action action = AcquireImage;
-auto mdaevent = MDAEvent(index, channel, exposure, min_start_time, position, action, global_index, keep_shutter_open);
-}
+// int main(){
+// // Here, we instantiate MDAEvent objects and print out their attributes.
+// // We also instantiate Position and Channel objects and print out their attributes.
+// // We also instantiate PropertyTuple objects and print out their attributes.
+// auto index = std::map<std::string, int>();
+// index["t"] = 4;
+// index["c"] = 0;
+// index["z"] = 5;
+// Channel channel = Channel("FITC", "channel");
+// float exposure = 50;
+// float min_start_time = 8;
+// Position position = Position();
+// position.setZ(2);
+// position.setName("dummyPos");
+// int global_index = 0;
+// bool keep_shutter_open = false;
+// Action action = AcquireImage;
+// auto mdaevent = MDAEvent(index, channel, exposure, min_start_time, position, action, global_index, keep_shutter_open);
+// }

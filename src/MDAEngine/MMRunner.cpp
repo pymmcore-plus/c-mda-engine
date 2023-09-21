@@ -22,6 +22,8 @@
 #include <direct.h>
 #endif
 
+#include "StdoutEventNotifier.h"
+
 using namespace std;
 
 CMMRunner::CMMRunner():
@@ -32,6 +34,7 @@ pausedInterval_(0.1),
 cancelled_(false)
 {
     core_ = new CMMCore();
+    notifier_ = new StdoutEventNotifier();
     // get current time in seconds
     resetTimer();
 }
@@ -69,7 +72,9 @@ CMMRunner::~CMMRunner()
 
 float CMMRunner::timeElapsed()
 {
-    return getCurrentTime() -startTime_;
+    auto elapsedtime = getCurrentTime() -startTime_;
+    std::cout << "timeElapsed is called" << elapsedtime << std::endl;
+    return elapsedtime;
 }
 bool CMMRunner::isRunning()
 {
@@ -115,6 +120,7 @@ bool
 */
 bool CMMRunner::waitUntilEvent(MDAEvent& event)
 {
+    std::cout << "waitUntilEvent is called" << timeElapsed() << " MinStart" << event.getMinStartTime() <<  std::endl;
     if (!isRunning())
         return false;
     else if (checkCanceled())
@@ -149,7 +155,7 @@ bool CMMRunner::waitUntilEvent(MDAEvent& event)
                 break;
             
             // sleep for minimum of 0.5 seconds and to_go
-            // TODO: 0.5 seconds should be a hyperparameter.
+            // TODO: why  are we sleeping for 0.5 seconds here?
             auto sleepdur =min(to_go*1000, (float)(500.0));
             sleep_for(sleepdur);
 
@@ -157,6 +163,8 @@ bool CMMRunner::waitUntilEvent(MDAEvent& event)
 
             
         }
+
+        std::cout << "waitUntilEvent is finished" << timeElapsed() << std::endl;
     }
     
 // check canceled again in case it was canceled
@@ -212,6 +220,8 @@ void* CMMRunner::execEvent(MDAEvent& event)
         core_->setShutterOpen(false);
     }
     void* output = core_->getImage();
+    auto metadata = std::map<std::string, std::string>();
+    notifier_->notifyFrameReady(event,metadata, output);
     return output;
 }
 

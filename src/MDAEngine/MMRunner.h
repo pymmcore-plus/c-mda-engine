@@ -11,7 +11,7 @@
 #include <vector>
 
 #include "../MMCore.h"
-
+#include "BaseEventNotifier.h"
 
 class MDAEvent;
 class CMMCore;
@@ -61,6 +61,7 @@ private:
     float pausedInterval_;
     bool cancelled_; 
     float startTime_;
+    BaseEventNotifier* notifier_;
 };
 
 #endif //_MMRunner_H_
