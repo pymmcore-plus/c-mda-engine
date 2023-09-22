@@ -34,11 +34,11 @@ public:
     
     // void teardownEvent(MDAEvent& event);
     void resetTimer();
-    float timeElapsed();
+    double timeElapsed();
     bool checkCanceled();
     void finishRun();
     void prepareToRun();
-    float getCurrentTime();
+    double getCurrentTime();
     // engine related
     void setEventPosition(MDAEvent& event);
     void setEventZ(MDAEvent& event);
@@ -57,10 +57,10 @@ private:
     CMMCore* core_;
     bool running_;
     bool paused_; 
-    float pausedTime_;
-    float pausedInterval_;
+    double pausedTime_;
+    double pausedInterval_;
     bool cancelled_; 
-    float startTime_;
+    double startTime_;
     BaseEventNotifier* notifier_;
 };
 

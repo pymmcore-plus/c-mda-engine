@@ -39,12 +39,15 @@ cancelled_(false)
     resetTimer();
 }
 
-float CMMRunner::getCurrentTime()
+double CMMRunner::getCurrentTime()
 {
-    return std::chrono::duration_cast<std::chrono::milliseconds>(
-        std::chrono::system_clock::now().time_since_epoch()).count()/1000.0;
+    auto now = std::chrono::system_clock::now().time_since_epoch();
+    auto millisecs = std::chrono::duration_cast<std::chrono::milliseconds>(now).count();
+    double secs = millisecs / 1000.0;
+    return secs;
+    
 }
-void sleep_for(float milliseconds)
+void sleep_for(double milliseconds)
 {
     long long int microsec = (long long int)(milliseconds*1000.0);
     std::this_thread::sleep_for(std::chrono::microseconds(microsec));
@@ -70,10 +73,10 @@ CMMRunner::~CMMRunner()
     // delete sequence_;
 }
 
-float CMMRunner::timeElapsed()
+double CMMRunner::timeElapsed()
 {
-    auto elapsedtime = getCurrentTime() -startTime_;
-    std::cout << "timeElapsed is called" << elapsedtime << std::endl;
+    double curtime = getCurrentTime();
+    double elapsedtime = curtime -startTime_;
     return elapsedtime;
 }
 bool CMMRunner::isRunning()
@@ -120,11 +123,11 @@ bool
 */
 bool CMMRunner::waitUntilEvent(MDAEvent& event)
 {
-    std::cout << "waitUntilEvent is called" << timeElapsed() << " MinStart" << event.getMinStartTime() <<  std::endl;
     if (!isRunning())
         return false;
     else if (checkCanceled())
         return true;
+    
     while (isPaused() && (!cancelled_))
     {
         pausedTime_ += pausedInterval_;
@@ -136,6 +139,7 @@ bool CMMRunner::waitUntilEvent(MDAEvent& event)
         }
 
     }
+
     if (event.getMinStartTime())
     {
         auto go_at = event.getMinStartTime() + pausedTime_;
@@ -156,7 +160,7 @@ bool CMMRunner::waitUntilEvent(MDAEvent& event)
             
             // sleep for minimum of 0.5 seconds and to_go
             // TODO: why  are we sleeping for 0.5 seconds here?
-            auto sleepdur =min(to_go*1000, (float)(500.0));
+            auto sleepdur = min(to_go*1000, (double)(500.0));
             sleep_for(sleepdur);
 
             to_go = go_at - timeElapsed();
@@ -164,7 +168,6 @@ bool CMMRunner::waitUntilEvent(MDAEvent& event)
             
         }
 
-        std::cout << "waitUntilEvent is finished" << timeElapsed() << std::endl;
     }
     
 // check canceled again in case it was canceled

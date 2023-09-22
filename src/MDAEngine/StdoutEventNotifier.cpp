@@ -54,4 +54,26 @@ void StdoutEventNotifier::notifyFrameReady(MDAEvent& event, std::map<std::string
 //     std::map<std::string, std::string> metadata;
 //     void* pixels = nullptr;
 //     notifier.notifyFrameReady(event, metadata, pixels);
+
+
+//     auto timesince_epoch =  std::chrono::system_clock::now().time_since_epoch();
+//     auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(timesince_epoch).count();
+//     auto milis2 = timesince_epoch/std::chrono::milliseconds(1);
+//     auto milis3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()/1000.0;
+
+//     std::cout << "millis: " << millis/1000.0 << std::endl;
+//     std::cout << "millis2: " << milis2 << std::endl;
+//     std::cout << "millis3: " << milis3 << std::endl;
+//     std::cout << "one milli second" << std::chrono::milliseconds(1).count() << std::endl;
+
+//     std::this_thread::sleep_for(std::chrono::microseconds(4*1000 * 1000));
+
+//     timesince_epoch =  std::chrono::system_clock::now().time_since_epoch();
+//     millis = std::chrono::duration_cast<std::chrono::milliseconds>(timesince_epoch).count();
+//     milis2 = timesince_epoch/std::chrono::milliseconds(1);
+//     milis3 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count()/1000.0 - milis3;
+
+//     std::cout << "millis1: " << millis/1000.0 << std::endl;
+//     std::cout << "millis2: " << milis2 << std::endl;
+//     std::cout << "millis3: " << milis3 << std::endl;
 // }
