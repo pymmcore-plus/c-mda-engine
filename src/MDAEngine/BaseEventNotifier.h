@@ -9,6 +9,7 @@
 #endif
 #include <map>
 #include "MDAPosition.h"
+#include "MDAEvent.h"
 /*
 There are 5 types of signals which needs to be handled by this class:
     Start event 
@@ -20,7 +21,7 @@ There are 5 types of signals which needs to be handled by this class:
 class BaseEventNotifier{
     public:
         virtual void notifyStart(MDAEvent& event) = 0;
-        virtual void notifyPauseToggled(bool paused) = 0;
+        virtual void notifyPauseToggled(MDAEvent& event, bool paused) = 0;
         virtual void notifyCanceled(MDAEvent& event) = 0;
         virtual void notifyFinished(MDAEvent& event) = 0;
         virtual void notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image) = 0;

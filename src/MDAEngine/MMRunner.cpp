@@ -23,6 +23,7 @@
 #endif
 
 #include "StdoutEventNotifier.h"
+#include "EventDataManager.h"
 
 using namespace std;
 
@@ -34,9 +35,14 @@ pausedInterval_(0.1),
 cancelled_(false)
 {
     core_ = new CMMCore();
-    notifier_ = new StdoutEventNotifier();
+    notifier_ = new EventDataManager();
     // get current time in seconds
     resetTimer();
+}
+
+EventState CMMRunner::getEventState(int event_id)
+{
+    return ((EventDataManager*)notifier_)->getState(event_id);
 }
 
 double CMMRunner::getCurrentTime()
@@ -211,6 +217,7 @@ void * CMMRunner::runEvent(MDAEvent& event)
     {
         return nullptr;
     }
+    notifier_->notifyStart(event);
     setupEvent(event);
     auto output = execEvent(event);
     return output;

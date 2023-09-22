@@ -11,6 +11,8 @@
 #include "MDAPosition.h"
 
 enum Action {AcquireImage}; 
+enum EventState {Start, Paused, Canceled, Finished, FrameReady};
+
 class Position; 
 
 class Channel{
@@ -50,6 +52,7 @@ public:
     bool isChannelSet();
     bool isAutoshutterSet();
     bool KeepShutterOpen();
+    int getGlobalIndex() {return globalIndex_;};
     Action getAction() {return action_;};
 private:
     std::map<std::string, int> index_;

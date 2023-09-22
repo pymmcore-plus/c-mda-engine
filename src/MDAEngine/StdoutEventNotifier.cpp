@@ -9,7 +9,7 @@ void StdoutEventNotifier::notifyStart(MDAEvent& event){
     std::cout << "Start event" << std::endl;
 }
 
-void StdoutEventNotifier::notifyPauseToggled(bool paused){
+void StdoutEventNotifier::notifyPauseToggled(MDAEvent& event, bool paused){
     std::cout << "PauseToggle event" << std::endl;
 }
 

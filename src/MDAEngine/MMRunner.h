@@ -31,6 +31,8 @@ public:
     bool waitUntilEvent(MDAEvent& event);
     void setupEvent(MDAEvent& event);
     void* execEvent(MDAEvent& event);
+    // event related 
+    EventState getEventState(int event_id);
     
     // void teardownEvent(MDAEvent& event);
     void resetTimer();
