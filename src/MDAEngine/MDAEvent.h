@@ -18,6 +18,9 @@ class Position;
 class Channel{
     public:
         Channel(std::string config, std::string group);
+        std::string getConfig(){return config_;};
+        std::string getGroup(){return group_;};
+    private:
         std::string config_;
         std::string group_;
 };
@@ -50,10 +53,11 @@ public:
     bool isZSet();
     bool isExposureSet();
     bool isChannelSet();
-    bool isAutoshutterSet();
-    bool KeepShutterOpen();
+    bool keepShutterOpen();
     int getGlobalIndex() {return globalIndex_;};
     Action getAction() {return action_;};
+    std::string getChannelGroup(){return channel_.getGroup();};
+    std::string getChannelConfig(){return channel_.getConfig();};
 private:
     std::map<std::string, int> index_;
     Channel channel_;

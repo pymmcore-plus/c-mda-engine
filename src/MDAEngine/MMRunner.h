@@ -30,11 +30,11 @@ public:
     void* runEvent(MDAEvent& event);
     bool waitUntilEvent(MDAEvent& event);
     void setupEvent(MDAEvent& event);
+    void teardownEvent(MDAEvent& event);
     void* execEvent(MDAEvent& event);
     // event related 
     EventState getEventState(int event_id);
     
-    // void teardownEvent(MDAEvent& event);
     void resetTimer();
     double timeElapsed();
     bool checkCanceled();
@@ -46,8 +46,6 @@ public:
     void setEventZ(MDAEvent& event);
     void setEventExposure(MDAEvent& event);
     void setEventChannel(MDAEvent& event);
-    void setEventAutoshutter(MDAEvent& event);
-    void loadSystemConfiguration(std::string config_file="MMConfig_demo.cfg");
 
     // from mmcore
     unsigned getImageWidth() { return core_->getImageWidth(); };
@@ -64,6 +62,10 @@ private:
     bool cancelled_; 
     double startTime_;
     BaseEventNotifier* notifier_;
+    bool autoshutterWasSet_;
+    // TODO: Z correction related.
+    std::map<int, double> zCorrection_;
+    std::map<int, double> zCorrectionDefault_;
 };
 
 #endif //_MMRunner_H_

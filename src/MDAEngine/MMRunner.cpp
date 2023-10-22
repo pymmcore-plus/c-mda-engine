@@ -38,6 +38,7 @@ cancelled_(false)
     notifier_ = new EventDataManager();
     // get current time in seconds
     resetTimer();
+    autoshutterWasSet_ = core_->getAutoShutter();
 }
 
 EventState CMMRunner::getEventState(int event_id)
@@ -220,12 +221,13 @@ void * CMMRunner::runEvent(MDAEvent& event)
     notifier_->notifyStart(event);
     setupEvent(event);
     auto output = execEvent(event);
+    teardownEvent(event);
     return output;
 }
 void* CMMRunner::execEvent(MDAEvent& event)
 {
     core_->snapImage();
-    if (!event.KeepShutterOpen())
+    if (!event.keepShutterOpen())
     {
         core_->setShutterOpen(false);
     }
@@ -258,9 +260,15 @@ void CMMRunner::setupEvent(MDAEvent& event)
     {
         setEventExposure(event);
     }
-    if (event.isAutoshutterSet())
+    if (autoshutterWasSet_ && event.keepShutterOpen())
     {
-        setEventAutoshutter(event);
+        // autoshutterWasSet_: (if autoshutter wasn't set at the beginning of the sequence
+        // then it never matters...)
+        // keepShutterOpen: if we want to leave the shutter open after this event, and autoshutter
+        // is currently enabled...
+
+        core_->setShutterOpen(true);
+        core_->setAutoShutter(false);
     }
 
 }
@@ -271,34 +279,56 @@ void CMMRunner::finishRun()
     cancelled_ = false;
 }
 
-// engine related
-void CMMRunner::setEventZ(MDAEvent& event)
+void CMMRunner::teardownEvent(MDAEvent& event)
 {
-    ;
+    if (!event.keepShutterOpen() && autoshutterWasSet_)
+    {
+        core_->setAutoShutter(true);
+    }
 }
+
 void CMMRunner::setEventChannel(MDAEvent& event)
 {
-    ;
+    std::string channel_group = event.getChannelGroup();
+    std::string channel_config = event.getChannelConfig();
+    // TODO: for some reason, setConfig is failing. 
+    // "ValueError: Preset "DAPI" of configuration group "channel" does not exist"
+    // However, in the config file, I see the entry for it. 
+    // std::cout << "Setting channel group to " << channel_group << " and channel config to " << channel_config << std::endl;
+    // core_->setConfig(channel_group.c_str(), channel_config.c_str());
 }
 void CMMRunner::setEventExposure(MDAEvent& event)
 {
-    ;
+    double exposure = event.getExposure();
+    core_->setExposure(exposure);
 }
-void CMMRunner::setEventAutoshutter(MDAEvent& event)
+
+
+// engine related
+void CMMRunner::setEventZ(MDAEvent& event)
 {
-    ;
+    std::string focus_device = core_->getFocusDevice();
+    if (focus_device.empty())
+    {
+        std::cout << "No focus device set. Cannot set Z position." << std::endl;
+        return;
+    }
+    auto z_pos = event.getZ();
+    core_->setPosition(focus_device.c_str(), z_pos);
+
 }
+
 void CMMRunner::setEventPosition(MDAEvent& event)
 {
-    float x_pos;
-    float y_pos;
+    double x_pos;
+    double y_pos;
     if (event.isXSet())
     {
         x_pos = event.getX();
     }
     else{
         // TODO: call mmcore to get current position
-        x_pos = 0.0;
+        x_pos = core_->getXPosition();
     }
 
     if (event.isYSet())
@@ -307,18 +337,13 @@ void CMMRunner::setEventPosition(MDAEvent& event)
     }
     else{
         // TODO: call mmcore to get current position
-        y_pos = 0.0;
+        y_pos = core_->getYPosition();
     
     }
-    // TODO: call mmcore to set position
-    // self._mmc.setXYPosition(x_pos, y_pos);
+    core_->setXYPosition(x_pos, y_pos);
 }
 
 
-void CMMRunner::loadSystemConfiguration(std::string config_file)
-{
-    core_->loadSystemConfiguration(config_file.c_str());
-}
 // int main(int argc, char **argv)
 // {
 // //  auto var = CMMRunner();

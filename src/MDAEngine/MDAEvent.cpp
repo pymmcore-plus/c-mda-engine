@@ -45,7 +45,7 @@ MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float expo
     {
     ;
     }
-bool MDAEvent::KeepShutterOpen(){
+bool MDAEvent::keepShutterOpen(){
     return keepShutterOpen_;
 }
 
@@ -90,11 +90,9 @@ bool MDAEvent::isExposureSet(){
     return exposure_ != 0;
 }
 bool MDAEvent::isChannelSet(){
-    return channel_.config_ != "";
+    return !channel_.getConfig().empty();
 }
-bool MDAEvent::isAutoshutterSet(){
-    return false;
-}
+
 
 // int main(){
 // // Here, we instantiate MDAEvent objects and print out their attributes.
