@@ -19,7 +19,7 @@ class CMMCore;
 class CMMRunner
 {
 public:
-    CMMRunner();
+    CMMRunner(CMMCore* core);
     ~CMMRunner();
 
     bool isRunning();

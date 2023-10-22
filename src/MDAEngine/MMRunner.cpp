@@ -27,14 +27,14 @@
 
 using namespace std;
 
-CMMRunner::CMMRunner():
+CMMRunner::CMMRunner(CMMCore* core):
+core_(core),
 running_(false),
 paused_(false),
 pausedTime_(0),
 pausedInterval_(0.1),
 cancelled_(false)
 {
-    core_ = new CMMCore();
     notifier_ = new EventDataManager();
     // get current time in seconds
     resetTimer();
