@@ -16,22 +16,27 @@ class EventMetaData{
     public:
         EventMetaData(int event_id, EventState state);
         void updateState(EventState state);
+        void updateImage(void* image);
         EventState getState(){return state_;};
+        void* getImage(){return image_;};
     private:
         int eventId_;
         EventState state_;
+        void* image_;
 };
 
 class EventDataManager : public BaseEventNotifier{
     public:
         EventDataManager();
-        void notifyStart(MDAEvent& event);
-        void notifyPauseToggled(MDAEvent& event, bool paused);
-        void notifyCanceled(MDAEvent& event);
-        void notifyFinished(MDAEvent& event);
-        void notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image);
+        bool notifyStart(MDAEvent& event);
+        bool notifyPauseToggled(MDAEvent& event, bool paused);
+        bool notifyCanceled(MDAEvent& event);
+        bool notifyFinished(MDAEvent& event);
+        bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image);
 
+        // Fetching data from acquisition
         EventState getState(int event_id);
+        void* getImage(int event_id);
         double secondsTaken();
     private:
     std::map<int, EventMetaData&> eventsState_;

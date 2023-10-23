@@ -45,6 +45,10 @@ EventState CMMRunner::getEventState(int event_id)
 {
     return ((EventDataManager*)notifier_)->getState(event_id);
 }
+void* CMMRunner::getEventImage(int event_id)
+{
+    return ((EventDataManager*)notifier_)->getImage(event_id);
+}
 
 double CMMRunner::getCurrentTime()
 {

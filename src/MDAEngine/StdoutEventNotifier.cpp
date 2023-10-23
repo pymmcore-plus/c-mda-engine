@@ -5,24 +5,29 @@
 #include "StdoutEventNotifier.h"
 using namespace std;
 
-void StdoutEventNotifier::notifyStart(MDAEvent& event){
+bool StdoutEventNotifier::notifyStart(MDAEvent& event){
     std::cout << "Start event" << std::endl;
+    return true;
 }
 
-void StdoutEventNotifier::notifyPauseToggled(MDAEvent& event, bool paused){
+bool StdoutEventNotifier::notifyPauseToggled(MDAEvent& event, bool paused){
     std::cout << "PauseToggle event" << std::endl;
+    return true;
 }
 
-void StdoutEventNotifier::notifyCanceled(MDAEvent& event){
+bool StdoutEventNotifier::notifyCanceled(MDAEvent& event){
     std::cout << "Canceled event" << std::endl;
+    return true;
 }
 
-void StdoutEventNotifier::notifyFinished(MDAEvent& event){
+bool StdoutEventNotifier::notifyFinished(MDAEvent& event){
     std::cout << "Finished event" << std::endl;
+    return true;
 }
 
-void StdoutEventNotifier::notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image){
+bool StdoutEventNotifier::notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image){
     std::cout << "frameReady event" << std::endl;
+    return true;
 }
 
 

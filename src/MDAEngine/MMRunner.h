@@ -32,8 +32,10 @@ public:
     void setupEvent(MDAEvent& event);
     void teardownEvent(MDAEvent& event);
     void* execEvent(MDAEvent& event);
-    // event related 
+    
+    // Fetching data from acquisition 
     EventState getEventState(int event_id);
+    void* getEventImage(int event_id);
     
     void resetTimer();
     double timeElapsed();

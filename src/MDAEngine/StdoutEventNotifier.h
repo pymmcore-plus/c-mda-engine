@@ -23,11 +23,11 @@ There are 5 types of signals which needs to be handled by this class:
 */
 class StdoutEventNotifier : public BaseEventNotifier{
     public:
-        void notifyStart(MDAEvent& event);
-        void notifyPauseToggled(MDAEvent& event, bool paused);
-        void notifyCanceled(MDAEvent& event);
-        void notifyFinished(MDAEvent& event);
-        void notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image);
+        bool notifyStart(MDAEvent& event);
+        bool notifyPauseToggled(MDAEvent& event, bool paused);
+        bool notifyCanceled(MDAEvent& event);
+        bool notifyFinished(MDAEvent& event);
+        bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image);
 };
 
 
