@@ -17,6 +17,7 @@ class Position;
 
 class Channel{
     public:
+        Channel();
         Channel(std::string config, std::string group);
         std::string getConfig(){return config_;};
         std::string getGroup(){return group_;};
@@ -38,6 +39,7 @@ private:
 
 class MDAEvent{
 public:
+    MDAEvent();
     MDAEvent(std::map<std::string, int> index, Channel channel, float exposure,
     float min_start_time, Position position, Action action, int global_index, bool keep_shutter_open);
     float getMinStartTime();

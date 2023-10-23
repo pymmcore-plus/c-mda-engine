@@ -13,6 +13,13 @@
 #include "MDAEvent.h"
 
 using namespace std;
+Channel::Channel():
+    config_(""),
+    group_("")
+{
+    // dummy constructor created for SWIG. We need a vector of MDAEvent as an argument to run(). For that this is needed.
+    ;
+}
 
 Channel::Channel(string config, string group):
     config_(config),
@@ -28,7 +35,14 @@ PropertyTuple::PropertyTuple(string device_name, string property_name, float val
 {
     ;
 }
-
+MDAEvent::MDAEvent():
+    xSet_(false),
+    ySet_(false),
+    zSet_(false)
+{
+    // dummy constructor created for SWIG. We need a vector of MDAEvents as an argument to run(). 
+    ;
+}
 MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float exposure,
     float min_start_time, Position position, Action action, int global_index, bool keep_shutter_open):
     index_(index),
