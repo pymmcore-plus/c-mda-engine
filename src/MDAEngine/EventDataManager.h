@@ -28,6 +28,7 @@ class EventMetaData{
 class EventDataManager : public BaseEventNotifier{
     public:
         EventDataManager();
+        bool notifyRegistered(MDAEvent& event);
         bool notifyStart(MDAEvent& event);
         bool notifyPauseToggled(MDAEvent& event, bool paused);
         bool notifyCanceled(MDAEvent& event);

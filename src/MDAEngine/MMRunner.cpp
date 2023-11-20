@@ -105,11 +105,13 @@ void CMMRunner::cancel()
     cancelled_ = true;
     pausedTime_ = 0;
 }
-void CMMRunner::togglePause()
+bool CMMRunner::togglePause(MDAEvent& event)
 {
     if (isRunning()){
         paused_ = !paused_;
+        return notifier_->notifyPauseToggled(event, paused_);
     }
+    return false;
 }
 
 
@@ -217,7 +219,7 @@ void CMMRunner::run(std::vector<MDAEvent>& events)
 */
 void CMMRunner::runEvent(MDAEvent& event)
 {
-
+    notifier_->notifyRegistered(event);
     if (waitUntilEvent(event)||  !running_)
     {
         return;

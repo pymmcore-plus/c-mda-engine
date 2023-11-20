@@ -30,6 +30,10 @@ bool StdoutEventNotifier::notifyFrameReady(MDAEvent& event, std::map<std::string
     return true;
 }
 
+bool StdoutEventNotifier::notifyRegistered(MDAEvent& event){
+    std::cout << "Registered event" << std::endl;
+    return true;
+}
 
 // int main()
 // {

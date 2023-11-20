@@ -11,7 +11,7 @@
 #include "MDAPosition.h"
 
 enum Action {AcquireImage}; 
-enum EventState {DoesNotExist, Start, Paused, Canceled, Finished, FrameReady};
+enum EventState {DoesNotExist, Registered, Start, Paused, Canceled, Finished, FrameReady};
 
 class Position; 
 

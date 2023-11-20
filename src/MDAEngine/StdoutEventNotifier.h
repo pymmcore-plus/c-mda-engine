@@ -23,6 +23,7 @@ There are 5 types of signals which needs to be handled by this class:
 */
 class StdoutEventNotifier : public BaseEventNotifier{
     public:
+        bool notifyRegistered(MDAEvent& event);
         bool notifyStart(MDAEvent& event);
         bool notifyPauseToggled(MDAEvent& event, bool paused);
         bool notifyCanceled(MDAEvent& event);

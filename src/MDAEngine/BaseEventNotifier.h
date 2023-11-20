@@ -20,6 +20,7 @@ There are 5 types of signals which needs to be handled by this class:
 */
 class BaseEventNotifier{
     public:
+        virtual bool notifyRegistered(MDAEvent& event) = 0;
         virtual bool notifyStart(MDAEvent& event) = 0;
         virtual bool notifyPauseToggled(MDAEvent& event, bool paused) = 0;
         virtual bool notifyCanceled(MDAEvent& event) = 0;

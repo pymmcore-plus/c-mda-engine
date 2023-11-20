@@ -25,7 +25,7 @@ public:
     bool isRunning();
     bool isPaused();
     void cancel();
-    void togglePause();
+    bool togglePause(MDAEvent& event);
     void run(std::vector<MDAEvent> &events);
     void runEvent(MDAEvent& event);
     bool waitUntilEvent(MDAEvent& event);

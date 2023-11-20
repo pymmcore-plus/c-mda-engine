@@ -19,13 +19,24 @@ void EventMetaData::updateImage(void* image){
 EventDataManager::EventDataManager(){
 }
 
-bool EventDataManager::notifyStart(MDAEvent& event){
-    EventMetaData* eventMetaData = new EventMetaData(event.getGlobalIndex(), Start);
+
+bool EventDataManager::notifyRegistered(MDAEvent& event){
+    EventMetaData* eventMetaData = new EventMetaData(event.getGlobalIndex(), Registered);
     if (eventsState_.find(event.getGlobalIndex()) != eventsState_.end())
     {
         return false;
     }
     eventsState_.insert(std::pair<int, EventMetaData&>(event.getGlobalIndex(), *eventMetaData));
+    return true;
+}
+
+bool EventDataManager::notifyStart(MDAEvent& event){
+    if (eventsState_.find(event.getGlobalIndex()) == eventsState_.end())
+    {
+        return false;
+    }
+    EventMetaData& eventMetaData = eventsState_.at(event.getGlobalIndex());
+    eventMetaData.updateState(Start);
     return true;
 }
 
