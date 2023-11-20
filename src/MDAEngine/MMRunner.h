@@ -27,11 +27,11 @@ public:
     void cancel();
     void togglePause();
     void run(std::vector<MDAEvent> &events);
-    void* runEvent(MDAEvent& event);
+    void runEvent(MDAEvent& event);
     bool waitUntilEvent(MDAEvent& event);
     void setupEvent(MDAEvent& event);
     void teardownEvent(MDAEvent& event);
-    void* execEvent(MDAEvent& event);
+    void execEvent(MDAEvent& event);
     
     // Fetching data from acquisition 
     EventState getEventState(int event_id);

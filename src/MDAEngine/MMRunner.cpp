@@ -201,7 +201,7 @@ void CMMRunner::run(std::vector<MDAEvent>& events)
         runEvent(events[i]);
     }
    
-finishRun();
+    finishRun();
 }
 
 /**
@@ -215,20 +215,19 @@ finishRun();
 * bool
 * Returns the acquisiton output.
 */
-void * CMMRunner::runEvent(MDAEvent& event)
+void CMMRunner::runEvent(MDAEvent& event)
 {
 
     if (waitUntilEvent(event)||  !running_)
     {
-        return nullptr;
+        return;
     }
     notifier_->notifyStart(event);
     setupEvent(event);
-    auto output = execEvent(event);
+    execEvent(event);
     teardownEvent(event);
-    return output;
 }
-void* CMMRunner::execEvent(MDAEvent& event)
+void CMMRunner::execEvent(MDAEvent& event)
 {
     core_->snapImage();
     if (!event.keepShutterOpen())
@@ -238,7 +237,6 @@ void* CMMRunner::execEvent(MDAEvent& event)
     void* output = core_->getImage();
     auto metadata = std::map<std::string, std::string>();
     notifier_->notifyFrameReady(event,metadata, output);
-    return output;
 }
 
 
