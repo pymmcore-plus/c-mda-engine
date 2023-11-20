@@ -35,10 +35,7 @@ PropertyTuple::PropertyTuple(string device_name, string property_name, float val
 {
     ;
 }
-MDAEvent::MDAEvent():
-    xSet_(false),
-    ySet_(false),
-    zSet_(false)
+MDAEvent::MDAEvent()
 {
     // dummy constructor created for SWIG. We need a vector of MDAEvents as an argument to run(). 
     ;
@@ -51,9 +48,6 @@ MDAEvent::MDAEvent(std::map<std::string, int> index, Channel channel, float expo
     minStartTime_(min_start_time),
     position_(position),
     globalIndex_(global_index),
-    xSet_(false),
-    ySet_(false),
-    zSet_(false),
     action_(action),
     keepShutterOpen_(keep_shutter_open)
     {
@@ -69,36 +63,33 @@ float MDAEvent::getMinStartTime(){
 float MDAEvent::getExposure(){
     return exposure_;
 }
-float MDAEvent::getZ(){
+double MDAEvent::getZ(){
     return position_.getZ();
 }
-float MDAEvent::getX(){
+double MDAEvent::getX(){
     return position_.getX();
 }
-float MDAEvent::getY(){
+double MDAEvent::getY(){
     return position_.getY();
 }
-void MDAEvent::setZ(float z){
+void MDAEvent::setZ(double z){
     position_.setZ(z);
-    zSet_ = true;
 }
-void MDAEvent::setX(float x){
+void MDAEvent::setX(double x){
     position_.setX(x);
-    xSet_ = true;
 }
-void MDAEvent::setY(float y){
+void MDAEvent::setY(double y){
     position_.setY(y);
-    ySet_ = true;
 }
 
 bool MDAEvent::isXSet(){
-    return xSet_;
+    return position_.isXSet();
 }
 bool MDAEvent::isYSet(){
-    return ySet_;
+    return position_.isYSet();
 }
 bool MDAEvent::isZSet(){
-    return zSet_;
+    return position_.isZSet();
 }
 bool MDAEvent::isExposureSet(){
     return exposure_ != 0;
@@ -108,22 +99,22 @@ bool MDAEvent::isChannelSet(){
 }
 
 
-// int main(){
-// // Here, we instantiate MDAEvent objects and print out their attributes.
-// // We also instantiate Position and Channel objects and print out their attributes.
-// // We also instantiate PropertyTuple objects and print out their attributes.
-// auto index = std::map<std::string, int>();
-// index["t"] = 4;
-// index["c"] = 0;
-// index["z"] = 5;
-// Channel channel = Channel("FITC", "channel");
-// float exposure = 50;
-// float min_start_time = 8;
-// Position position = Position();
-// position.setZ(2);
-// position.setName("dummyPos");
-// int global_index = 0;
-// bool keep_shutter_open = false;
-// Action action = AcquireImage;
-// auto mdaevent = MDAEvent(index, channel, exposure, min_start_time, position, action, global_index, keep_shutter_open);
-// }
+int main(){
+// Here, we instantiate MDAEvent objects and print out their attributes.
+// We also instantiate Position and Channel objects and print out their attributes.
+// We also instantiate PropertyTuple objects and print out their attributes.
+auto index = std::map<std::string, int>();
+index["t"] = 4;
+index["c"] = 0;
+index["z"] = 5;
+Channel channel = Channel("FITC", "channel");
+float exposure = 50;
+float min_start_time = 8;
+Position position = Position();
+position.setZ(2);
+position.setName("dummyPos");
+int global_index = 0;
+bool keep_shutter_open = false;
+Action action = AcquireImage;
+auto mdaevent = MDAEvent(index, channel, exposure, min_start_time, position, action, global_index, keep_shutter_open);
+}

@@ -6,35 +6,41 @@ using namespace std;
 Position::Position():
     x_(UnsetPosition),
     y_(UnsetPosition),
-    z_(UnsetPosition)
+    z_(UnsetPosition),
+    xSet_(false),
+    ySet_(false),
+    zSet_(false)
 {
 ; // empty constructor
 }
-void Position::setX(float x)
+void Position::setX(double x)
 {
     x_ = x;
+    xSet_ = true;
 }
-void Position::setY(float y)
+void Position::setY(double y)
 {
     y_ = y;
+    ySet_ = true;
 }
-void Position::setZ(float z)
+void Position::setZ(double z)
 {
     z_ = z;
+    zSet_ = true;
 }
 void Position::setName(string name)
 {
     name_ = name;
 }
-float Position::getX()
+double Position::getX()
 {
     return x_;
 }
-float Position::getY()
+double Position::getY()
 {
     return y_;
 }
-float Position::getZ()
+double Position::getZ()
 {
     return z_;
 }

@@ -342,6 +342,7 @@ void CMMRunner::setEventPosition(MDAEvent& event)
         y_pos = core_->getYPosition();
     
     }
+    
     core_->setXYPosition(x_pos, y_pos);
 }
 

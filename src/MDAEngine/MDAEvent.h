@@ -44,12 +44,12 @@ public:
     float min_start_time, Position position, Action action, int global_index, bool keep_shutter_open);
     float getMinStartTime();
     float getExposure();
-    float getZ();
-    float getX();
-    float getY();
-    void setZ(float z);
-    void setX(float x);
-    void setY(float y);
+    double getZ();
+    double getX();
+    double getY();
+    void setZ(double z);
+    void setX(double x);
+    void setY(double y);
     bool isXSet();
     bool isYSet();
     bool isZSet();
@@ -67,9 +67,6 @@ private:
     float minStartTime_;
     Position position_;
     int globalIndex_;
-    bool xSet_;
-    bool ySet_;
-    bool zSet_;
     bool keepShutterOpen_;
     Action action_;
     std::map<std::string, float> metadata_;

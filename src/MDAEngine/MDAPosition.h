@@ -13,7 +13,7 @@
 
 #define MaxNameLength  256
 #define MaxConfigLength 2560
-#define UnsetPosition  (float)INT_MIN
+#define UnsetPosition  (double)INT_MIN
 
 // enum Indices {TIME, POSITION, GRID, CHANNEL, Z};
 // enum GridPlans {GridFromEdges, GridRelative, NoGrid};
@@ -22,19 +22,27 @@
 class Position {
 public:
     Position();
-    void setX(float x);
-    void setY(float y);
-    void setZ(float z);
+    void setX(double x);
+    void setY(double y);
+    void setZ(double z);
     void setName(std::string name);
-    float getX();
-    float getY();
-    float getZ();
+    double getX();
+    double getY();
+    double getZ();
+    bool isXSet() {return xSet_;};
+    bool isYSet() {return ySet_;};
+    bool isZSet() {return zSet_;};
+
     std::string getName();
 
 private:
-    float x_;
-    float y_;
-    float z_;
+    double x_;
+    double y_;
+    double z_;
+    bool xSet_;
+    bool ySet_;
+    bool zSet_;
+
     std::string name_;
     // TODO: sequence?
 
