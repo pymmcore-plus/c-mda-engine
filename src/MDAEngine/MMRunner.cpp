@@ -219,7 +219,7 @@ void CMMRunner::run(std::vector<MDAEvent>& events)
 */
 void CMMRunner::runEvent(MDAEvent& event)
 {
-    notifier_->notifyRegistered(event);
+    // notifier_->notifyRegistered(event);
     if (waitUntilEvent(event)||  !running_)
     {
         return;

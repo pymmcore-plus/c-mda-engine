@@ -17,6 +17,7 @@ class EventMetaData;
 class EventDataManager : public BaseEventNotifier{
     public:
         EventDataManager();
+        virtual bool notifyRegistered(MDAEvent& event, EventMetaData& eventMetaData);
         virtual bool notifyRegistered(MDAEvent& event);
         virtual bool notifyStart(MDAEvent& event);
         virtual bool notifyPauseToggled(MDAEvent& event, bool paused);

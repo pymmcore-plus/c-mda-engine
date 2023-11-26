@@ -7,6 +7,14 @@ using namespace std;
 EventDataManager::EventDataManager(){
 }
 
+bool EventDataManager::notifyRegistered(MDAEvent& event, EventMetaData& eventMetaData){
+    if (eventsState_.find(event.getGlobalIndex()) != eventsState_.end())
+    {
+        return false;
+    }
+    eventsState_.insert(std::pair<int, EventMetaData&>(event.getGlobalIndex(), eventMetaData));
+    return true;
+}
 
 bool EventDataManager::notifyRegistered(MDAEvent& event){
     EventMetaData* eventMetaData = new EventMetaData(event.getGlobalIndex(), Registered);
