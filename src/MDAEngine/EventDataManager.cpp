@@ -1,20 +1,8 @@
 #include "EventDataManager.h"
+#include "EventMetaData.h"
 #include <stdexcept>
 #include <iostream>
 using namespace std;
-
-EventMetaData::EventMetaData(int event_id, EventState state){
-    eventId_ = event_id;
-    state_ = state;
-}
-
-void EventMetaData::updateState(EventState state){
-    state_ = state;
-}
-
-void EventMetaData::updateImage(void* image){
-    image_ = image;
-}
 
 EventDataManager::EventDataManager(){
 }
@@ -75,7 +63,8 @@ bool EventDataManager::notifyFinished(MDAEvent& event){
     return true;
 }
 
-bool EventDataManager::notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image){
+bool EventDataManager::notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image,
+unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imageBitDepth){
     auto idx_globalindex =event.getGlobalIndex(); 
     if (eventsState_.find(idx_globalindex) == eventsState_.end())
     {
@@ -84,7 +73,7 @@ bool EventDataManager::notifyFrameReady(MDAEvent& event, std::map<std::string, s
     EventMetaData& eventMetaData = eventsState_.at(idx_globalindex);
     
     // Note that this order is important for thread safety. State should be set at the end. 
-    eventMetaData.updateImage(image);
+    eventMetaData.updateImage(image, imageWidth, imageHeight, bytesPerPixel, imageBitDepth);
     eventMetaData.updateState(FrameReady);
     return true;
 }
@@ -107,8 +96,60 @@ void* EventDataManager::getImage(int event_id){
     if (eventMetaData.getState() != FrameReady){
         return nullptr;
     }
+    lastEventId_ = event_id;
     return eventMetaData.getImage();
 }
+
+unsigned EventDataManager::getImageWidth(){
+    if (eventsState_.find(lastEventId_) == eventsState_.end())
+    {
+        return 0;
+    }
+    EventMetaData& eventMetaData = eventsState_.at(lastEventId_);
+    if (eventMetaData.getState() != FrameReady){
+        return 0;
+    }
+    return eventMetaData.getImageWidth();
+}
+
+unsigned EventDataManager::getImageHeight(){
+    if (eventsState_.find(lastEventId_) == eventsState_.end())
+    {
+        return 0;
+    }
+    EventMetaData& eventMetaData = eventsState_.at(lastEventId_);
+    if (eventMetaData.getState() != FrameReady){
+        return 0;
+    }
+    return eventMetaData.getImageHeight();
+}
+
+unsigned EventDataManager::getBytesPerPixel(){
+    if (eventsState_.find(lastEventId_) == eventsState_.end())
+    {
+        return 0;
+    }
+    EventMetaData& eventMetaData = eventsState_.at(lastEventId_);
+    if (eventMetaData.getState() != FrameReady){
+        return 0;
+    }
+    return eventMetaData.getBytesPerPixel();
+}
+
+unsigned EventDataManager::getImageBitDepth(){
+    if (eventsState_.find(lastEventId_) == eventsState_.end())
+    {
+        return 0;
+    }
+    EventMetaData& eventMetaData = eventsState_.at(lastEventId_);
+    if (eventMetaData.getState() != FrameReady){
+        return 0;
+    }
+    return eventMetaData.getImageBitDepth();
+}
+
+
+
 
 
 // int main(){

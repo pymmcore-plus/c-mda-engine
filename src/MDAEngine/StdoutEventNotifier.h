@@ -28,7 +28,8 @@ class StdoutEventNotifier : public BaseEventNotifier{
         bool notifyPauseToggled(MDAEvent& event, bool paused);
         bool notifyCanceled(MDAEvent& event);
         bool notifyFinished(MDAEvent& event);
-        bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image);
+        bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image, 
+                        unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imageBitDepth);
 };
 
 

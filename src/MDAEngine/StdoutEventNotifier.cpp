@@ -25,7 +25,8 @@ bool StdoutEventNotifier::notifyFinished(MDAEvent& event){
     return true;
 }
 
-bool StdoutEventNotifier::notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image){
+bool StdoutEventNotifier::notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image, 
+                        unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imageBitDepth){
     std::cout << "frameReady event" << std::endl;
     return true;
 }

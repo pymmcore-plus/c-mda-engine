@@ -20,12 +20,14 @@ There are 5 types of signals which needs to be handled by this class:
 */
 class BaseEventNotifier{
     public:
+        virtual ~BaseEventNotifier() {};
         virtual bool notifyRegistered(MDAEvent& event) = 0;
         virtual bool notifyStart(MDAEvent& event) = 0;
         virtual bool notifyPauseToggled(MDAEvent& event, bool paused) = 0;
         virtual bool notifyCanceled(MDAEvent& event) = 0;
         virtual bool notifyFinished(MDAEvent& event) = 0;
-        virtual bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image) = 0;
+        virtual bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image, 
+        unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imageBitDepth) = 0;
 };
 
 

@@ -238,7 +238,10 @@ void CMMRunner::execEvent(MDAEvent& event)
     }
     void* output = core_->getImage();
     auto metadata = std::map<std::string, std::string>();
-    notifier_->notifyFrameReady(event,metadata, output);
+    notifier_->notifyFrameReady(event,metadata, output, core_->getImageWidth(), 
+                core_->getImageHeight(), 
+                core_->getBytesPerPixel(), 
+                core_->getImageBitDepth());
 }
 
 

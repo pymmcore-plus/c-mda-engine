@@ -8,22 +8,11 @@
 #endif
 #include "BaseEventNotifier.h"
 #include "MDAEvent.h"
+#include "EventMetaData.h"
 #include <map>
 
 class MDAEvent;
-
-class EventMetaData{
-    public:
-        EventMetaData(int event_id, EventState state);
-        void updateState(EventState state);
-        void updateImage(void* image);
-        EventState getState(){return state_;};
-        void* getImage(){return image_;};
-    private:
-        int eventId_;
-        EventState state_;
-        void* image_;
-};
+class EventMetaData;
 
 class EventDataManager : public BaseEventNotifier{
     public:
@@ -33,13 +22,22 @@ class EventDataManager : public BaseEventNotifier{
         bool notifyPauseToggled(MDAEvent& event, bool paused);
         bool notifyCanceled(MDAEvent& event);
         bool notifyFinished(MDAEvent& event);
-        bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image);
+        bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image, 
+                            unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imageBitDepth);
 
         // Fetching data from acquisition
         EventState getState(int event_id);
+        // EventMetaData& getEventMetaData(int event_id);
         void* getImage(int event_id);
-        double secondsTaken();
+        // to get the image, we need few things:
+        unsigned getImageWidth() ;
+        unsigned getImageHeight() ;
+        unsigned getBytesPerPixel() ;
+        unsigned getImageBitDepth() ;
+
+        // double secondsTaken();
     private:
+    int lastEventId_;
     std::map<int, EventMetaData&> eventsState_;
 };
 
