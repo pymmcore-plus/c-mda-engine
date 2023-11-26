@@ -17,12 +17,12 @@ class EventMetaData;
 class EventDataManager : public BaseEventNotifier{
     public:
         EventDataManager();
-        bool notifyRegistered(MDAEvent& event);
-        bool notifyStart(MDAEvent& event);
-        bool notifyPauseToggled(MDAEvent& event, bool paused);
-        bool notifyCanceled(MDAEvent& event);
-        bool notifyFinished(MDAEvent& event);
-        bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image, 
+        virtual bool notifyRegistered(MDAEvent& event);
+        virtual bool notifyStart(MDAEvent& event);
+        virtual bool notifyPauseToggled(MDAEvent& event, bool paused);
+        virtual bool notifyCanceled(MDAEvent& event);
+        virtual bool notifyFinished(MDAEvent& event);
+        virtual bool notifyFrameReady(MDAEvent& event, std::map<std::string, std::string> &metadata, void* image, 
                             unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imageBitDepth);
 
         // Fetching data from acquisition
@@ -34,6 +34,7 @@ class EventDataManager : public BaseEventNotifier{
         unsigned getImageHeight() ;
         unsigned getBytesPerPixel() ;
         unsigned getImageBitDepth() ;
+        EventMetaData getEventMetaData(int event_id);
 
         // double secondsTaken();
     private:

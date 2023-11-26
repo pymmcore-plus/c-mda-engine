@@ -148,6 +148,15 @@ unsigned EventDataManager::getImageBitDepth(){
     return eventMetaData.getImageBitDepth();
 }
 
+EventMetaData EventDataManager::getEventMetaData(int event_id){
+    if (eventsState_.find(event_id) == eventsState_.end())
+    {
+        throw std::invalid_argument("Event id does not exist");
+    }
+    auto eventMetaData = eventsState_.at(event_id);
+    return eventMetaData;
+}
+
 
 
 

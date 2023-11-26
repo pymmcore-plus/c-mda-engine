@@ -3,6 +3,10 @@
 #include <iostream>
 using namespace std;
 
+EventMetaData::EventMetaData(){
+    eventId_ = -1;
+    state_ = DoesNotExist;
+}
 EventMetaData::EventMetaData(int event_id, EventState state){
     eventId_ = event_id;
     state_ = state;

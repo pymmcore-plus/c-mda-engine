@@ -12,6 +12,7 @@
 
 class EventMetaData{
     public:
+        EventMetaData();
         EventMetaData(int event_id, EventState state);
         void updateState(EventState state);
         void updateImage(void* image, unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imageBitDepth);

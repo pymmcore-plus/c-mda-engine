@@ -12,6 +12,7 @@
 
 #include "../MMCore.h"
 #include "BaseEventNotifier.h"
+#include "EventDataManager.h"
 
 class MDAEvent;
 class CMMCore;
@@ -19,7 +20,7 @@ class CMMCore;
 class CMMRunner
 {
 public:
-    CMMRunner(CMMCore* core);
+    CMMRunner(CMMCore* core, EventDataManager& notifier);
     ~CMMRunner();
 
     bool isRunning();

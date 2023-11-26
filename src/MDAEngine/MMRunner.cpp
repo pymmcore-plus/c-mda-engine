@@ -27,7 +27,7 @@
 
 using namespace std;
 
-CMMRunner::CMMRunner(CMMCore* core):
+CMMRunner::CMMRunner(CMMCore* core, EventDataManager& notifier):
 core_(core),
 running_(false),
 paused_(false),
@@ -35,7 +35,7 @@ pausedTime_(0),
 pausedInterval_(0.1),
 cancelled_(false)
 {
-    notifier_ = new EventDataManager();
+    notifier_ = &notifier;
     // get current time in seconds
     resetTimer();
     autoshutterWasSet_ = core_->getAutoShutter();
@@ -238,10 +238,15 @@ void CMMRunner::execEvent(MDAEvent& event)
     }
     void* output = core_->getImage();
     auto metadata = std::map<std::string, std::string>();
-    notifier_->notifyFrameReady(event,metadata, output, core_->getImageWidth(), 
+    cout << "executed done." << endl;
+    cout << "notifyframeready should not be called" << endl;
+
+    notifier_->notifyFrameReady(event,metadata, output, 
+                core_->getImageWidth(), 
                 core_->getImageHeight(), 
                 core_->getBytesPerPixel(), 
                 core_->getImageBitDepth());
+    cout << "notifyframeready called" << endl;
 }
 
 
