@@ -89,6 +89,11 @@ unsigned imageWidth, unsigned imageHeight, unsigned bytesPerPixel, unsigned imag
 EventState EventDataManager::getState(int event_id){
     if (eventsState_.find(event_id) == eventsState_.end())
     {
+        // cout << "Event not found" << endl;
+        //  // show content:
+        // for (auto it=eventsState_.begin(); it!=eventsState_.end(); ++it)
+        //     std::cout << it->first << " => " << '\n';
+
         return DoesNotExist;
     }
     EventMetaData& eventMetaData = eventsState_.at(event_id);
@@ -154,15 +159,6 @@ unsigned EventDataManager::getImageBitDepth(){
         return 0;
     }
     return eventMetaData.getImageBitDepth();
-}
-
-EventMetaData EventDataManager::getEventMetaData(int event_id){
-    if (eventsState_.find(event_id) == eventsState_.end())
-    {
-        throw std::invalid_argument("Event id does not exist");
-    }
-    auto eventMetaData = eventsState_.at(event_id);
-    return eventMetaData;
 }
 
 

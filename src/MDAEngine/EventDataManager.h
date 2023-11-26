@@ -35,7 +35,6 @@ class EventDataManager : public BaseEventNotifier{
         unsigned getImageHeight() ;
         unsigned getBytesPerPixel() ;
         unsigned getImageBitDepth() ;
-        EventMetaData getEventMetaData(int event_id);
 
         // double secondsTaken();
     private:
