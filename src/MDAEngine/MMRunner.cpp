@@ -222,6 +222,7 @@ void CMMRunner::runEvent(MDAEvent& event)
     // notifier_->notifyRegistered(event);
     if (waitUntilEvent(event)||  !running_)
     {
+        notifier_->notifyCanceled(event);
         return;
     }
     notifier_->notifyStart(event);
