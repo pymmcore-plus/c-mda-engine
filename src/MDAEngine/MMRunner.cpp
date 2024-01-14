@@ -239,15 +239,13 @@ void CMMRunner::execEvent(MDAEvent& event)
     }
     void* output = core_->getImage();
     auto metadata = std::map<std::string, std::string>();
-    cout << "executed done." << endl;
-    cout << "notifyframeready should not be called" << endl;
 
     notifier_->notifyFrameReady(event,metadata, output, 
                 core_->getImageWidth(), 
                 core_->getImageHeight(), 
                 core_->getBytesPerPixel(), 
                 core_->getImageBitDepth());
-    cout << "notifyframeready called" << endl;
+
 }
 
 
