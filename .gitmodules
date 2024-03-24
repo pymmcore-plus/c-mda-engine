@@ -1,0 +1,3 @@
+[submodule "src/mmCoreAndDevices"]
+	path = src/mmCoreAndDevices
+	url = git@asheshGIT:ashesh-0/mmCoreAndDevices.git
