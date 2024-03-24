@@ -10,7 +10,7 @@
 #include "MDAEvent.h"
 #include <vector>
 
-#include "../MMCore.h"
+#include "../mmCoreAndDevices/MMCore/MMCore.h"
 #include "BaseEventNotifier.h"
 #include "EventDataManager.h"
 
